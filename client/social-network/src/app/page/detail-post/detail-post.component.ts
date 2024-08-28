@@ -253,7 +253,11 @@ export class DetailPostComponent implements OnInit, OnDestroy {
         }),
       );
       console.log('comment created');
+      this.clearComment();
     }
+  }
+  clearComment() {
+    this.commentForm.reset();
   }
 
   createLike() {
@@ -267,6 +271,7 @@ export class DetailPostComponent implements OnInit, OnDestroy {
           },
         }),
       );
+
       this.isLiked = true;
     }
   }

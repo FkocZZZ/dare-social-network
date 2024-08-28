@@ -1,6 +1,6 @@
 import {
   Component,
-  ElementRef,
+  ElementRef, inject,
   OnDestroy,
   OnInit, signal,
   ViewChild,
@@ -22,6 +22,7 @@ import { PostState } from '../../../ngrx/post/post.state';
 import { Subscription } from 'rxjs';
 import { getAllPost } from '../../../ngrx/post/post.actions';
 import {PostDataModel} from "../../../model/post-data.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-creator',
@@ -42,6 +43,12 @@ export class CreatorComponent implements OnInit, OnDestroy {
 
   protected onInput(event: Event) {
     this.value.set((event.target as HTMLInputElement).value);
+  }
+  private _snackBar = inject(MatSnackBar);
+  openSnackBar(message: string, duration: number = 3000) {
+    this._snackBar.open(message, undefined, {
+      duration: duration,
+    });
   }
   profileMine$ = this.store.select('profile', 'mine');
   uid = '';
@@ -184,6 +191,7 @@ export class CreatorComponent implements OnInit, OnDestroy {
 
     this.clearInputData();
     this.resetState();
+    this.openSnackBar('Post created successfully');
   }
   // textLimit(text: string, wordLimit: number): string {
   //   text.split(/\s+/);

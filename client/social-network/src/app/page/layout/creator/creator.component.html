@@ -21,8 +21,8 @@
       <mat-form-field appearance="outline" class="content-field">
         <mat-label>Content</mat-label>
         <textarea matInput formControlName="content" cdkTextareaAutosize
-                 [cdkAutosizeMaxRows]="14" maxlength="500" (input)="onInput($event)"></textarea>
-        <mat-hint align="end">{{value().length}}/500</mat-hint>
+                 [cdkAutosizeMaxRows]="14" maxlength="350" (input)="onInput($event)"></textarea>
+        <mat-hint align="end">{{value().length}}/350</mat-hint>
 
 
 
@@ -30,7 +30,6 @@
     </div>
     <div>
       <button mat-flat-button id="post-button" (click)="createPost()">Post</button>
-      <h2></h2>
     </div>
   </div>
   </form>
