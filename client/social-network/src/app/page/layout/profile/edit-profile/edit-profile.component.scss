@@ -91,12 +91,14 @@ textarea{
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
-mat-form-field {
+::ng-deep .mat-mdc-text-field-wrapper{
   textarea{
-    height: 250px;
+    height: 100px !important;
   }
 }
+
+p
+
 
 .loader {
   width: 2rem;
