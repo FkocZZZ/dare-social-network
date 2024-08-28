@@ -46,4 +46,15 @@ export const SearchReducer = createReducer(
       };
     },
   ),
+
+  on(SearchActions.searchReset, (state, { type }) => {
+    console.log(type);
+    return {
+      searchResult: <CommonSearchResultModel>{},
+      searchResultLoading: false,
+      searchResultFailure: <HttpErrorResponseModel>{},
+      isSearching: false,
+      isSearchingSuccess: false,
+    };
+  }),
 );

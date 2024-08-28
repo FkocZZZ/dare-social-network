@@ -41,6 +41,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = [];
   isLoading = true;
   isSearching$ = this.store.select('search', 'isSearching');
+  searchResult$ = this.store.select('search', 'searchResult');
 
   constructor(
     private router: Router,
@@ -59,25 +60,33 @@ export class SearchComponent implements OnInit, OnDestroy {
         .subscribe((query) => {
           this.searchQuery = query.trim();
           this.performSearch();
-        })
+          this.store.dispatch(
+            SearchActions.search({ query: this.searchQuery }),
+          );
+        }),
+
+      this.searchResult$.subscribe((result) => {
+        if (result) {
+          this.posts = result.posts;
+        }
+      }),
     );
   }
 
   ngOnDestroy(): void {
     this.subscription.forEach((sub) => sub.unsubscribe());
     this.store.dispatch(postActions.clearGetPost());
+    this.store.dispatch(SearchActions.searchReset());
   }
 
   performSearch(): void {
     if (this.searchQuery.startsWith('@')) {
-      this.searchService.searchProfileByUsername(this.searchQuery.substring(0)).subscribe(results => {
-        this.posts = results;
-        console.log(results);
-      });
-    } else {
-      this.searchService.search(this.searchQuery).subscribe(results => {
-        this.posts = results.posts;
-      });
+      this.searchService
+        .searchProfileByUsername(this.searchQuery.substring(0))
+        .subscribe((results) => {
+          this.posts = results;
+          console.log(results);
+        });
     }
   }
 }

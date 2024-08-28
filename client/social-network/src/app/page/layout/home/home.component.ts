@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   selector: string = '.scroll-container';
   currentPage = 1;
-  size = 20;
+  size = 30;
   itemsCount = 0;
   subscription: Subscription[] = [];
   getAllPost$ = this.store.select('post', 'posts');
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.tempArray = [...this.posts];
           console.log(this.tempArray);
           this.posts = [...this.tempArray, ...posts.data];
-          this.itemsCount = posts.pageNumber;
+          this.itemsCount = posts.limitNumber;
         }
       }),
     );
@@ -75,8 +75,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   onScrollDown(ev: any) {
     console.log('scrolled down!!', ev);
     this.currentPage += 1;
-    console.log(this.currentPage);
-    console.log(this.itemsCount);
+    console.log('page', this.currentPage);
+    console.log('item', this.itemsCount);
 
     if (this.currentPage <= this.itemsCount) {
       console.log('get more post');

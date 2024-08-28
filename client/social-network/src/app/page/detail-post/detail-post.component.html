@@ -1,5 +1,8 @@
 @if(getPostDetail$| async){
-  <mat-spinner></mat-spinner>
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+
+  </div>
 } @else {
   <div class="container">
     <div class="detail-container">

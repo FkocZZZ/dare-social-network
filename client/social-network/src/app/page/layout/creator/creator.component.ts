@@ -128,6 +128,7 @@ export class CreatorComponent implements OnInit, OnDestroy {
       };
       reader.readAsDataURL(input.files[0]);
 
+
       console.log('Post Form: ', this.postForm);
 
     }else{

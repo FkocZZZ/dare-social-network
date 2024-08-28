@@ -5,10 +5,9 @@
       <img [src]="urlsa">
       <input type="file" (change)="onSelectedFile($event)" id="fileInput" hidden>
       @if(isUploading$|async){
-        <button class="upload" mat-raised-button (click)="document.getElementById('fileInput')?.click()">
-          <span class="loader"></span>
-        </button>
       } @else {
+        <mat-spinner [diameter]="48" ></mat-spinner>
+
         <button class="upload" mat-raised-button (click)="document.getElementById('fileInput')?.click()">Upload</button>
 <!--        <button class="upload" mat-raised-button (click)="document.getElementById('fileInput')?.click()">-->
 <!--          <span class="loader"></span>-->
